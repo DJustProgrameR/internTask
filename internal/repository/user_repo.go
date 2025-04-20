@@ -21,7 +21,7 @@ type UserRepo struct {
 }
 
 // NewUserRepo конструктор для создания нового экземпляра UserRepo
-func NewUserRepo(config RepositoryConfig) *UserRepo {
+func NewUserRepo(config Config) *UserRepo {
 	if config == nil {
 		log.Fatalf("user repo config is nil")
 		return nil
@@ -61,7 +61,7 @@ func (r *UserRepo) FindByEmail(ctx context.Context, email string) (*dao.User, er
 	u := &dao.User{}
 	err := row.Scan(&u.ID, &u.Email, &u.Password, &u.Role)
 	if err != nil {
-		if err.Error() == errorNoSqlRows {
+		if err.Error() == errorNoSQLRows {
 			return nil, nil
 		}
 		return nil, err

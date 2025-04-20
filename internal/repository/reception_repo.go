@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	errorNoSqlRows string = "sql: no rows in result set"
+	errorNoSQLRows string = "sql: no rows in result set"
 )
 
 // ReceptionRepo реализация репозитория для приёмок
@@ -19,7 +19,7 @@ type ReceptionRepo struct {
 }
 
 // NewReceptionRepo конструктор для создания нового экземпляра ReceptionRepo
-func NewReceptionRepo(config RepositoryConfig) *ReceptionRepo {
+func NewReceptionRepo(config Config) *ReceptionRepo {
 	if config == nil {
 		log.Fatalf("reception repo config is nil")
 		return nil
@@ -58,7 +58,7 @@ func (r *ReceptionRepo) FindOpened(ctx context.Context, rec *dao.Reception) erro
 		QueryRowContext(ctx).
 		Scan(&rec.ID)
 	if err != nil {
-		if err.Error() == errorNoSqlRows {
+		if err.Error() == errorNoSQLRows {
 			return nil
 		}
 		return err

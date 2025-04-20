@@ -77,7 +77,7 @@ func ModuleConfig() fx.Option {
 		fx.Provide(fx.Annotate(
 			config.NewAppConfig,
 			fx.As(new(service.JWTConfig)),
-			fx.As(new(repository.RepositoryConfig)),
+			fx.As(new(repository.Config)),
 			fx.As(new(AppConfig)),
 			fx.As(new(service.LoggerConfig)))),
 		// Регистрируем сервисы

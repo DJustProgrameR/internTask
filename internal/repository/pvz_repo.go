@@ -15,7 +15,7 @@ type PvzRepo struct {
 }
 
 // NewPVZRepo конструктор для создания нового экземпляра PvzRepo
-func NewPVZRepo(config RepositoryConfig) *PvzRepo {
+func NewPVZRepo(config Config) *PvzRepo {
 	if config == nil {
 		log.Fatalf("pvz repo config is nil")
 		return nil
@@ -75,7 +75,6 @@ func (r *PvzRepo) GetAllWithFilter(ctx context.Context, startDate, endDate strin
 	if err != nil {
 		return nil, err
 	}
-	defer pvzRows.Close()
 
 	var pvzs []*dao.PVZList
 	for pvzRows.Next() {
@@ -95,6 +94,9 @@ func (r *PvzRepo) GetAllWithFilter(ctx context.Context, startDate, endDate strin
 			return nil, err
 		}
 		pvzs = append(pvzs, &pvz)
+	}
+	if err := pvzRows.Close(); err != nil {
+		return nil, err
 	}
 	return pvzs, nil
 }

@@ -15,13 +15,13 @@ type ProductRepo struct {
 	qb sqrl.StatementBuilderType
 }
 
-// RepositoryConfig интерфейс конфигурации репозитория
-type RepositoryConfig interface {
+// Config интерфейс конфигурации репозитория
+type Config interface {
 	GetDbConnection() *sqlx.DB
 }
 
 // NewProductRepo конструктор для создания нового экземпляра ProductRepo
-func NewProductRepo(config RepositoryConfig) *ProductRepo {
+func NewProductRepo(config Config) *ProductRepo {
 	if config == nil {
 		log.Fatalf("product repo config is nil")
 		return nil
