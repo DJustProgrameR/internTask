@@ -25,7 +25,7 @@ func validateID(id uuid.UUID) (uuid.UUID, error) {
 
 	variant := id.Variant()
 
-	if version == 4 || variant == uuid.RFC4122 {
+	if version != 4 || variant != uuid.RFC4122 {
 		return uuid.New(), errors.New(model.ErrAccessDenied)
 	}
 	return id, nil

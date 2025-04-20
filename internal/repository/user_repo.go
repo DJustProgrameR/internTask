@@ -12,7 +12,6 @@ import (
 
 const (
 	errorViolatesUniqueEmailConstraint = "pq: duplicate key value violates unique constraint \"users_email_key\""
-	errorNoSqlRows                     = "sql: no rows in result set"
 )
 
 // UserRepo реализация репозитория для пользователей
